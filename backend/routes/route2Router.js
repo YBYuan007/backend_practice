@@ -3,6 +3,8 @@ const { post, route } = require("./route1Router");
 const route2 = express.Router();
 const { default: axios } = require("axios");
 
+const URL = process.env.REACT_APP_API;
+
 route2.get("/", function (req, res, next) {
   if (!req.query.tag) {
     res.status(400);
@@ -11,7 +13,7 @@ route2.get("/", function (req, res, next) {
     const sort = req.query.sortBy;
     const direc = req.query.direction;
     
-   axios.get("https://api.hatchways.io/assessment/blog/posts", {params: {tag}})
+   axios.get(URL, {params: {tag}})
    .then((response)=>{
      const posts = response.data.posts;
      const resultArray = posts.filter((post) => post.tags.includes(tag));
@@ -33,7 +35,7 @@ route2.get("/", function (req, res, next) {
   }
 });
 
-route2
+// route2
 
 // axios.post(
 //   `localhost:/api/posts`,
